@@ -13,11 +13,11 @@ function moveTile() {
 // tile is 30px
 // 300 - 30 = 270
 if (x < 270) {
-    setTimeout(moveTile, 100)
+    setTimeout(moveTile, 1000)
 }
 ```
 
-`setTimeout` shedules a function to be executed in the future. This does not pause the rest of the execution. So in this case at `t=0` (I'll refer to time passing as `t=x`) we enter the `while(...)` loop. In the first iteration you schedule `moveTile` to execute 100ms in the future. Then we're still at `t=0` and `x=0` as `moveTile` has not run yet. So we schedule `moveTile` again, still at `t=0` and `x=0`. This will repeat infinitely many times (as many as it can fit in the 1s until `moveTile` will finally run). This 1s is enough to crash the webpage with al these scheduled function calls.
+`setTimeout` shedules a function to be executed in the future. This does not pause the rest of the execution. So in this case at `t=0` (I'll refer to time passing as `t=x`) we enter the `while(...)` loop. In the first iteration you schedule `moveTile` to execute 1000ms in the future. Then we're still at `t=0` and `x=0` as `moveTile` has not run yet. So we schedule `moveTile` again, still at `t=0` and `x=0`. This will repeat infinitely many times (as many as it can fit in the 1s until `moveTile` will finally run). This 1s is enough to crash the webpage with al these scheduled function calls.
 
 # timeout-less-wrong.html
 ```js
@@ -33,11 +33,11 @@ function moveTile() {
 // 300 - 30 = 270
 if (x < 270) {
     x = x + 1;
-    setTimeout(moveTile, 2000)
+    setTimeout(moveTile, 5000)
 }
 ```
 
-So the problem in the previous one was us scheduling (almost) infinite function calls at `t=0`. To get rid of this problem we could increment `x` in the `while` loop instead of the `moveTile` function. This way at `t=0` we increment `x` by `1` and we schedule `moveTile` to run in 100 seconds. Then still at `t=0` we come into the loop again, we increment `x` again and we schedule `moveTile` again. This will run `300` times at `t=0` so we've scheduled `moveTile` to run `300` times at `t=100`. This means that all these move calls will still run at the same time. So the tile will be at the bottom but we stil don't have our animation as we want it. 
+So the problem in the previous one was us scheduling (almost) infinite function calls at `t=0`. To get rid of this problem we could increment `x` in the `while` loop instead of the `moveTile` function. This way at `t=0` we increment `x` by `1` and we schedule `moveTile` to run in 100 seconds. Then still at `t=0` we come into the loop again, we increment `x` again and we schedule `moveTile` again. This will run `300` times at `t=0` so we've scheduled `moveTile` to run `300` times at `t=5000`. This means that all these move calls will still run at the same time. So the tile will be at the bottom but we stil don't have our animation as we want it. 
 
 # timeout-correct.html
 ```js
