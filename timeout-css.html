@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                display: grid;
+                place-content: center;
+                background-color: #0c0c0c;
+                color: white;
+            }
+
+            .container {
+                width: 400px;
+                height: 300px;
+                background-color: salmon;
+                position: relative;
+                overflow-y: hidden;
+            }
+
+            .tile {
+                width: 30px;
+                height: 30px;
+                background-color: papayawhip;
+                position: absolute;
+                top: 0;
+                transition: 1s;
+                transition-timing-function: ease-in;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+                <div class="tile" id="tile-1" />
+        </div>
+    </body>
+    <script>
+        function moveTile() {
+            const tile = document.querySelector("#tile-1");
+            tile.style.top = 270;
+        }
+
+        // we still use a small timeout as without it the tile would
+        // actually never have the original top = 0 and we would not get a
+        // animation. This would not be a problem if it actually triggers on a click
+        // or something. 
+        setTimeout(moveTile, 5)
+    </script>
+</html>

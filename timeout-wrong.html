@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                display: grid;
+                place-content: center;
+                background-color: #0c0c0c;
+                color: white;
+            }
+
+            .container {
+                width: 400px;
+                height: 300px;
+                background-color: salmon;
+                position: relative;
+                overflow-y: hidden;
+            }
+
+            .tile {
+                width: 30px;
+                height: 30px;
+                background-color: papayawhip;
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+                <div class="tile" id="tile-1" />
+        </div>
+    </body>
+    <script>
+        let x = 0;
+
+        function moveTile() {
+            x = x + 1;
+            const tile = document.querySelector("#tile-1");
+            tile.style.top = x;
+        }
+
+       // container is 300px
+        // tile is 30px
+        // 300 - 30 = 270
+        if (x < 270) {
+            setTimeout(moveTile, 100)
+        }
+
+    </script>
+</html>
